@@ -1,0 +1,74 @@
+.slider-outer {
+  max-width: 1273px;
+  width: 100%;
+  overflow: hidden;
+
+  .slider-inner {
+    display: flex;
+    transition: transform 1.5s ease-in-out;
+  }
+
+  .slide {
+    min-width: 1273px;
+    margin-right: 20px;
+    height: 564px;
+    display: flex;
+    justify-content: space-between;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 628px;
+
+      .title {
+        font-size: 40px;
+        font-weight: 400;
+      }
+      .paragraph {
+        font-size: 24px;
+        line-height: 36px;
+      }
+    }
+
+    .illustration {
+      width: 629px;
+      height: 564px;
+    }
+  }
+
+  .controls {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-top: 32px;
+
+    .leftArrow, .rightArrow {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .rightArrow {
+      transform: rotate(180deg);
+    }
+
+    .current {
+      font-size: 40px;
+      margin-left: 12px;
+    }
+    .slash {
+      font-size: 34px;
+      color: #C3C5EF;
+      margin: 0 4px;
+    }
+    .number {
+      font-size: 28px;
+      color: #C3C5EF;
+      margin-right: 12px;
+    }
+  }
+}

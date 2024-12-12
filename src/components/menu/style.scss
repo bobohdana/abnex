@@ -1,0 +1,31 @@
+.anchor {
+  position: relative;
+  cursor: pointer;
+
+  .menu {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 8px;
+    font-size: 20px;
+    display: none;
+
+    .item {
+      display: flex;
+      align-items: center;
+      width: 240px;
+      height: 48px;
+      padding: 12px;
+      border-radius: 8px;
+
+      &:hover {
+        background: linear-gradient(#EDEDFA, #C3C5EF)
+      }
+    }
+  }
+
+  &:hover {
+    .menu {
+      display: block;
+    }
+  }
+}
