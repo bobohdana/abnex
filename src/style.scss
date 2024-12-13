@@ -6,8 +6,40 @@
 body {
   font-family: "Inter", sans-serif;
   margin: 0 auto;
-  overflow: hidden;
+  // overflow: hidden;
   box-sizing: border-box;
   max-width: 1512px;
   width: 100%;
+  font-size: 16px;
+  color: #15151D;
+}
+
+h1 {
+  font-size: 3.75rem; //60px
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 3.25rem; //52px
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 2.5rem; //40px
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 2rem; //32px
+  font-weight: 400;
+}
+
+p {
+  font-size: 1.5rem; //24px
+  line-height: 36px;
+}
+
+.text {
+  font-size: 1.25rem; //20px
+  line-height: 24.2px;
 }

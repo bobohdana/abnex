@@ -8,6 +8,7 @@
     border-radius: 8px;
     font-size: 20px;
     display: none;
+    box-shadow: 0 7px 16px #15151D08, 0 29px 29px #15151D08, 0 65px 39px #15151D05, 0 116px 46px #15151D00, 0 181px 51px #15151D00, 0 4px 20px 2px #15151D1A;
 
     .item {
       display: flex;
@@ -18,7 +19,7 @@
       border-radius: 8px;
 
       &:hover {
-        background: linear-gradient(#EDEDFA, #C3C5EF)
+        background: linear-gradient(to right, #EDEDFA, #C3C5EF)
       }
     }
   }

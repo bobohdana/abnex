@@ -66,8 +66,8 @@ const Slider = ({ slides = SLIDES }) => {
           slides.map((slide, index) => (
             <div className="slide" key={index}>
               <div className="info">
-                <h3 className='title'>{slide.title}</h3>
-                <p className='paragraph'>{slide.description}</p>
+                <h3>{slide.title}</h3>
+                <p>{slide.description}</p>
               </div>
               <img src={slide.image} className='illustration' alt='illustration' />
             </div>

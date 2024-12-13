@@ -1,0 +1,63 @@
+.switcher {
+  display: flex;
+  height: 656px;
+
+  .pictureBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 628px;
+    height: 655px;
+    background-image: url('./../../assets/subtract.png');
+    background-repeat: no-repeat;
+    margin-right: 123px;
+
+    &::after {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 0;
+      display: block;
+      width: 306px;
+      height: 82px;
+      border: 1px solid #DEE0F6;
+      border-radius: 12px;
+      z-index: -1;
+    }
+  }
+
+  .switches {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    .switch {
+      width: 519px;
+      height: 96px;
+      display: flex;
+      align-items: center;
+      border-radius: 20px;
+      padding: 0 24px;
+      cursor: pointer;
+      background-color: #F5F5FD;
+      box-shadow: 0 7px 16px #15151D08, 0 29px 29px #15151D08, 0 65px 39px #15151D05, 0 116px 46px #15151D00, 0 181px 51px #15151D00, 0 4px 20px 2px #15151D1A;
+      
+      &:hover {
+        background: linear-gradient(to right, #F5F5FD, #C3C5EF);
+      }
+
+      &.selected {
+        background: linear-gradient(to right, #F5F5FD, #C3C5EF);
+      }
+
+      .icon {
+        margin-right: 15px;
+        background-color: #D9FE95;
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}
