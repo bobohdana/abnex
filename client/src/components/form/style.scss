@@ -1,0 +1,49 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 520px;
+  width: 100%;
+
+  input, textarea {
+    margin-bottom: 16px;
+  }
+
+  .condition {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+
+    p {
+      font-size: 1rem;
+      line-height: normal;
+    }
+
+    .checkbox {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 2px solid #C1C1C1;
+      border-radius: 1px;
+      margin-right: 14px;
+
+      &.selected {
+        background-color: #ABABE7;
+        border-color: #DEE0F6;
+        background-image: url('../../assets/icons/check.png');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+
+  .link {
+    color: #ABABE7;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .captcha {
+    margin-bottom: 16px;
+  }
+}

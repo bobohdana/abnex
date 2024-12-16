@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import TextField from '../inputs/TextField';
-import Button from '../button';
+import React, { useState, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import './style.scss';
+
+import TextField from '../inputs/TextField';
 import TextArea from '../inputs/TextArea';
+import FilePicker from '../inputs/FilePicker'
+import Button from '../button';
 
 const fields = [
   {
@@ -53,12 +56,12 @@ const fields = [
     initialValue: '',
     Component: TextArea,
   },
-  // {
-  //   field: 'file',
-  //   onPreview: false,
-    // initialValue: null,
-  //   component: TextField,
-  // },
+  {
+    field: 'file',
+    onPreview: false,
+    initialValue: null,
+    Component: FilePicker,
+  },
 ]
 
 const Form = ({ isPreview = false }) => {
@@ -74,9 +77,13 @@ const Form = ({ isPreview = false }) => {
   }, {})
 
   const [values, setValues] = useState(initialValues);
-
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState(false);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+
+  const captchaRef = useRef(null);
+  const token = captchaRef.current?.getValue();
   
   const dirty = Object.values(values).some(value => !!value);
   const isError = Object.values(errors).some(value => value);
@@ -94,12 +101,18 @@ const Form = ({ isPreview = false }) => {
       setErrors(_errors);
     } else {
       setLoading(true);
-
-      setTimeout(() => {
-        console.log('values', values);
-
+      
+      fetch('/', {
+        method: 'POST',
+        body: JSON.stringify({ values, token }),
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }).then(() => {
+        captchaRef.current.reset();
+        setValues(initialValues);
         setLoading(false);
-      }, 2000)
+      })
     }
   }
   
@@ -164,7 +177,35 @@ const Form = ({ isPreview = false }) => {
         ) : null)
       }
 
-      <Button type='submit' size='small' disabled={!dirty || isError}>Send</Button>
+      <div className='condition'>
+        <div className={`checkbox ${selected && 'selected'}`} onClick={() => setSelected(!selected)} />
+        <p>
+          I have read and agree to the 
+          <a href='/terms-and-conditions' target='_blank' className='link'>&nbsp;terms of service&nbsp;</a>
+          an
+          <a href='/privacy-policy' target='_blank' className='link'>&nbsp;privacy policies</a>
+        </p>
+      </div>
+
+      {selected && (
+        <div className="captcha">
+          <ReCAPTCHA 
+            // sitekey={process.env.REACT_APP_SITE_KEY}
+            sitekey='6LfSGJ0qAAAAAHH1PXz-L0yLRUPRajqleKiR7RiD'
+            ref={captchaRef}
+            onChange={() => setCaptchaVerified(true)}
+            onExpired={() => setCaptchaVerified(false)}
+          />
+        </div>
+      )}
+
+      <Button
+        type='submit'
+        size='small'
+        disabled={!dirty || isError || !selected || !captchaVerified}
+      >
+        Send
+      </Button>
     </form>
   )
 }

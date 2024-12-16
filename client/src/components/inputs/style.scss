@@ -1,0 +1,80 @@
+.textarea, .input {
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  color: #7F7AD8;
+  padding: 16px 24px;
+  border: 1px solid #7F7AD8;
+  border-radius: 12px;
+  font-family: "Inter", sans-serif;
+}
+.input, .textarea {
+  &::placeholder {
+    color: #DEE0F6;
+  }
+  
+  &.error {
+    border: 1px solid #D9617E;
+  }
+}
+.textarea {
+  resize: none;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.fileName {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  color: #7F7AD8;
+  font-size: 1.5rem;
+
+  p {
+    margin: 0 0 0 10px;
+  }
+
+  .trash {
+    position: absolute;
+    cursor: pointer;
+    right: 0;
+  }
+}
+
+.fileLabel {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  max-width: 245px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 48px;
+  border: 1px solid #ABABE7;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  color: #ABABE7;
+  cursor: pointer;
+
+  .fileIcon {
+    margin-right: 10px;
+  }
+}
+
+.fileInput {
+  display: none;
+}
