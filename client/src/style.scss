@@ -3,11 +3,13 @@
   --purple: #ABABE7;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Inter", sans-serif;
   margin: 0 auto;
-  // overflow: hidden;
-  box-sizing: border-box;
   max-width: 1512px;
   width: 100%;
   font-size: 16px;
@@ -27,11 +29,18 @@ h2 {
 h3 {
   font-size: 2.5rem; //40px
   font-weight: 400;
+  margin: 0;
 }
 
-h3 {
+h4 {
   font-size: 2rem; //32px
   font-weight: 400;
+  margin: 0;
+}
+
+h6 {
+  font-size: 1.25rem; //20px
+  font-weight: 500;
 }
 
 p {
@@ -39,7 +48,18 @@ p {
   line-height: 36px;
 }
 
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 .text {
   font-size: 1.25rem; //20px
   line-height: 24.2px;
+}
+
+.content {
+  padding: 128px 0 272px 0;
+  overflow: scroll;
+  height: 100vh;
 }

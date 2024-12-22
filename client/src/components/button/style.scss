@@ -27,6 +27,18 @@
     padding: 16px 48px;
   }
 
+  &.special {
+    width: 184px;
+    height: 53px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+  }
+
+  &.gradient {
+    background: linear-gradient(to right, #EDEDFA, #C3C5EF);
+  }
+
   &:disabled {
     color: #15151D80;
     background-color: #15151D1A;

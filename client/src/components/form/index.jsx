@@ -177,15 +177,17 @@ const Form = ({ isPreview = false }) => {
         ) : null)
       }
 
-      <div className='condition'>
-        <div className={`checkbox ${selected && 'selected'}`} onClick={() => setSelected(!selected)} />
-        <p>
-          I have read and agree to the 
-          <a href='/terms-and-conditions' target='_blank' className='link'>&nbsp;terms of service&nbsp;</a>
-          an
-          <a href='/privacy-policy' target='_blank' className='link'>&nbsp;privacy policies</a>
-        </p>
-      </div>
+      {!isPreview && (
+        <div className='condition'>
+          <div className={`checkbox ${selected && 'selected'}`} onClick={() => setSelected(!selected)} />
+          <p>
+            I have read and agree to the 
+            <a href='/terms-and-conditions' target='_blank' className='link'>&nbsp;terms of service&nbsp;</a>
+            an
+            <a href='/privacy-policy' target='_blank' className='link'>&nbsp;privacy policies</a>
+          </p>
+        </div>
+      )}
 
       {selected && (
         <div className="captcha">

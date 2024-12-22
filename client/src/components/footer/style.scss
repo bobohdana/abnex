@@ -1,0 +1,29 @@
+.footer {
+  position: fixed;
+  width: 100%;
+  max-width: 1512px;
+  bottom: 0;
+  height: 272px;
+  padding: 60px 120px;
+  background: linear-gradient(#F5F5FD, #C3C5EF);
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+
+  .infos {
+    display: flex;
+
+    .info {
+      margin-left: 120px;
+      font-size: 1.25rem;
+
+      h6 {
+        margin: 0 0 24px;
+      }
+
+      li {
+        margin-bottom: 16px;
+      }
+    }
+  }
+}

@@ -1,5 +1,7 @@
 .switcher {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: 656px;
 
   .pictureBox {
@@ -11,7 +13,7 @@
     height: 655px;
     background-image: url('./../../assets/subtract.png');
     background-repeat: no-repeat;
-    margin-right: 123px;
+    // margin-right: 123px;
 
     &::after {
       position: absolute;
@@ -27,11 +29,24 @@
     }
   }
 
+  &.reverse {
+    flex-direction: row-reverse;
+
+    .pictureBox {
+      background-image: url('./../../assets/subtract-reverse.png');
+      background-size: contain;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
   .switches {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    // justify-content: space-between;
+    // height: 100%;
 
     .switch {
       width: 519px;
@@ -41,6 +56,8 @@
       border-radius: 20px;
       padding: 0 24px;
       cursor: pointer;
+      margin-bottom: 16px;
+      font-size: 2rem;
       background-color: #F5F5FD;
       box-shadow: 0 7px 16px #15151D08, 0 29px 29px #15151D08, 0 65px 39px #15151D05, 0 116px 46px #15151D00, 0 181px 51px #15151D00, 0 4px 20px 2px #15151D1A;
       

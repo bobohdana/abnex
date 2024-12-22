@@ -1,9 +1,13 @@
 .anchor {
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
   cursor: pointer;
 
   .menu {
     position: absolute;
+    top: 52px;
     background-color: #fff;
     border-radius: 8px;
     font-size: 20px;
@@ -19,7 +23,7 @@
       border-radius: 8px;
 
       &:hover {
-        background: linear-gradient(to right, #EDEDFA, #C3C5EF)
+        background: linear-gradient(to right, #EDEDFA, #C3C5EF);
       }
     }
   }
