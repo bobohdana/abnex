@@ -4,13 +4,14 @@
   align-items: center;
   height: 100%;
   cursor: pointer;
+  font-size: 1.25rem;
 
   .menu {
     position: absolute;
     top: 52px;
     background-color: #fff;
     border-radius: 8px;
-    font-size: 20px;
+    font-size: 1.25rem;
     display: none;
     box-shadow: 0 7px 16px #15151D08, 0 29px 29px #15151D08, 0 65px 39px #15151D05, 0 116px 46px #15151D00, 0 181px 51px #15151D00, 0 4px 20px 2px #15151D1A;
 
@@ -26,11 +27,10 @@
         background: linear-gradient(to right, #EDEDFA, #C3C5EF);
       }
     }
-  }
 
-  &:hover {
-    .menu {
-      display: block;
+    &.isMobile {
+      top: 56px;
+      right: -12px;
     }
   }
 }

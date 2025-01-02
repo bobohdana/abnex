@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PaperClip from '../icons/PaperClip';
 import { trash } from '../../assets/icons';
 
 import './style.scss';
 
-const FilePicker = () => {
+const FilePicker = ({ name, isFormReset }) => {
   const [file, setFile] = useState(null);
+
+  useEffect(() => {
+    if (isFormReset) {
+      setFile(null);
+    }
+  }, [isFormReset])
 
   const handleChange = (event) => {
     setFile(event.target.files[0]);
@@ -30,6 +36,7 @@ const FilePicker = () => {
       </label>
       <input
         id='upload-file'
+        name={name}
         className='fileInput'
         onChange={handleChange}
         type='file'

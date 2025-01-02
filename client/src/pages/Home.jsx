@@ -4,16 +4,19 @@ import { useNavigate } from 'react-router';
 import './style.scss';
 
 import work from '../assets/work.png';
-import substract from '../assets/big-block-substract.png';
 import bigBlock from '../assets/big-block.svg';
-import rightBlock from '../assets/big-block-right.svg';
+import rightBlockUp from '../assets/big-block-right-up.svg';
+import rightBlockDown from '../assets/big-block-right-down.svg';
+import blockMbTop from '../assets/block-mb-3.svg';
+import blockMbCenter from '../assets/block-mb-4.svg';
+import blockMbBottom from '../assets/block-mb-5.svg';
 import illustration from '../assets/third-image.png';
 
 import Button from '../components/button';
 import Switcher from '../components/switcher';
 import { Blocks, FormSection } from '../components/section';
 
-import { ITEMS_ONE, ITEMS_TWO, BLOCKS_ONE, BLOCKS_TWO } from '../constants';
+import { ITEMS_ONE, ITEMS_TWO, BLOCKS_ONE, BLOCKS_ONE_MB, BLOCKS_TWO, BLOCKS_TWO_MB } from '../constants';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -22,10 +25,12 @@ const Home = () => {
     navigate('/contact');
   }
 
+  const isMobile = window.screen.width < 750;
+
   return (
     <div className='home'>
       <section className='first'>
-        <div className='bg'>
+        <div className='bg padding'>
           <div className='left'>
             <div>
               <h1>Simplify Your Remote Tech Projects!</h1>
@@ -46,7 +51,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className='second'>
+      <section className='second padding'>
         <div className='top'>
           <img src={work} alt="" />
           <div>
@@ -59,9 +64,13 @@ const Home = () => {
 
         <div className='center'>
           <Blocks
-            data={BLOCKS_ONE}
+            data={isMobile ? BLOCKS_ONE_MB : BLOCKS_ONE}
             ExtraInfo={() => (
-              <Button onClick={navigateToContact}>Contact With Us</Button>
+              <div className='extraInfo'>
+                <Button onClick={navigateToContact}>
+                  {isMobile ? 'Contact Us' : 'Contact With Us'}
+                </Button>
+              </div>
             )}
           />
         </div>
@@ -71,35 +80,40 @@ const Home = () => {
 
           <div className='info'>
             <div className='bigBlockBox'>
-              <img src={bigBlock} alt='' />
-              <img src={substract} className='substract' alt='' />
-              <h4>Your Remote Team !</h4>
-              <p>"Either we take the helm of your projects, or you steer remote teams."<br />
+              <img src={isMobile ? blockMbTop : bigBlock} alt='' />
+              <h4 className='substract'>Your Remote Team !</h4>
+              <p>"Either we take the helm of your projects, or you steer remote teams."<br /><br />
                 We offer the option to provide dedicated teams or to recruit specific profiles based on our clients' needs.
                 Our consultants are carefully selected to meet your needs, whether you're managing remotely or entrusting us with developing your project.</p>
             </div>
             <div className='bigBlocks'>
               <div className="rightBlock">
-                <img src={rightBlock} alt="" />
-                <h4>Tech Consulting Services</h4>
-                <p>Our remote services give you access to a pool of talents. Whether you're looking for developers, cybersecurity experts, or other IT profiles, our dedicated team employs innovative methods to find the best-suited candidates for your needs. With an agile and efficient approach, we're here to help you build a high-performing team.</p>
+                <img src={isMobile ? blockMbCenter : rightBlockUp} alt="" />
+                <div className='blockText'>
+                  <h4>Tech Consulting Services</h4>
+                  <p>Our remote services give you access to a pool of talents. Whether you're looking for developers, cybersecurity experts, or other IT profiles, our dedicated team employs innovative methods to find the best-suited candidates for your needs. With an agile and efficient approach, we're here to help you build a high-performing team.</p>
+                </div>
               </div>
               <div className="rightBlock">
-                <img src={rightBlock} alt="" />
-                <h4>Custom Software Development</h4>
-                <p>Every business is unique, we understand the importance of customization. We embrace your enterprise challenges, whether it's process automation, integration, optimization, or R&D. Our agile approach to software development, ensures that we deliver solutions that meet your specific needs and drive your business forward.</p>
+                <img src={isMobile ? blockMbBottom : rightBlockDown} alt="" />
+                <div className='blockText'>
+                  <h4>Custom Software Development</h4>
+                  <p>Every business is unique, we understand the importance of customization. We embrace your enterprise challenges, whether it's process automation, integration, optimization, or R&D. Our agile approach to software development, ensures that we deliver solutions that meet your specific needs and drive your business forward.</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className='third'>
+      <section className='third padding'>
         <div className='left'>
           <h2>Advanced technologies</h2>
-          <p>Abnex Remote harnesses cutting-edge technology, agile collaboration, and flexibility to tackle any challenge and deliver customized solutions to our clients.</p>
-          <p>With the latest technologies, dynamic delivery teams, and adaptable pricing structures, Abnex Remote is ready to tackle any business challenge.</p>
-          <p>We offer a team of developers skilled in the latest technologies such as ReactJS, Swift, Kotlin, TypeScript, Go, NodeJS, as well as Python, JavaScript, and many more...</p>
+          <div>
+            <p>Abnex Remote harnesses cutting-edge technology, agile collaboration, and flexibility to tackle any challenge and deliver customized solutions to our clients.</p>
+            <p>With the latest technologies, dynamic delivery teams, and adaptable pricing structures, Abnex Remote is ready to tackle any business challenge.</p>
+            <p>We offer a team of developers skilled in the latest technologies such as ReactJS, Swift, Kotlin, TypeScript, Go, NodeJS, as well as Python, JavaScript, and many more...</p>
+          </div>
         </div>
         <div className='right'>
           <img src={illustration} alt="" />
@@ -112,7 +126,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className='fourth'>
+      <section className='fourth padding'>
         <div className='container'>
           <div className='title'>
             <h2>Receive the service or product delivery </h2>
@@ -132,13 +146,17 @@ const Home = () => {
         </div>
       </section>
 
-      <section className='fifth'>
+      <section className='fifth padding'>
         <Blocks
-          data={BLOCKS_TWO}
-          ExtraInfo={() => (
+          data={isMobile ? BLOCKS_TWO_MB : BLOCKS_TWO}
+          ExtraInfo={() => !isMobile ? (
             <div className='extraInfo'>
               <p>Work with full remote profiles.</p>
               <Button onClick={navigateToContact} color='secondary'>Contact With Us</Button>
+            </div>
+          ) : (
+            <div className='extraInfo'>
+              <Button onClick={navigateToContact}>Contact Us</Button>
             </div>
           )}
         />

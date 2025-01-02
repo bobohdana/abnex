@@ -33,17 +33,17 @@ const Footer = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="footer">
+    <div className="padding footer">
       <div><img src={logo} alt="logo" /></div>
 
       <div className='infos'>
         {
-          INFOS.map(info => (
-            <div className="info">
+          INFOS.map((info, index) => (
+            <div className="info" key={index}>
               <h6>{info.title}</h6>
 
-              <ul>{info.list.map(item => (
-                <li onClick={() => navigate(item.pass)}>{item.label}</li>
+              <ul>{info.list.map((item, index) => (
+                <li onClick={() => navigate(item.pass)} key={index}>{item.label}</li>
               ))}</ul>
             </div>
           ))

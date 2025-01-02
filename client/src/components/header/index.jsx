@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
+import { menu } from '../../assets/icons';
 import logo from '../../assets/logo.png';
 import './style.scss';
 
@@ -20,10 +21,17 @@ const Header = () => {
       action: () => navigate('/services/software-development')
     },
   ]
+
+  const extraItem = {
+    title: 'Contact Us',
+    action: () => navigate('/contact')
+  }
   
   return (
-    <div className='header'>
-      <a href="/"><img src={logo} alt='logo' /></a>
+    <div className='header padding' id='header'>
+      <div className="logo">
+        <img src={logo} alt='logo' onClick={() => navigate('/')} />
+      </div>
 
       <ul className="nav">
         <li>
@@ -31,6 +39,12 @@ const Header = () => {
         </li>
         <li onClick={() => navigate('/about')}>About us</li>
       </ul>
+
+      <div className="navMobile">
+        <Menu items={[...items, extraItem]} isMobile={true}>
+          <img src={menu} alt="" />
+        </Menu>
+      </div>
 
       <Button
         size='special'

@@ -1,10 +1,13 @@
 const express = require("express");
+const fs = require('fs');
 const cors = require("cors");
+const multer = require("multer");
 const axios = require("axios");
 const nodemailer = require("nodemailer");
 
 const router = express.Router();
 const app = express();
+const upload = multer({ dest: 'uploads/' });
 
 require("dotenv").config();
 
@@ -13,7 +16,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use("/", router);
 
@@ -25,20 +28,23 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const mailOptions = ({ values }) => ({
+const mailOptions = ({ values, file }) => ({
   from: process.env.EMAIL,
   to: 'bohdanastetsenko@gmail.com',
   subject: 'A New Form',
-  // html: `
-  //   <!DOCTYPE html>
-
-  //   <html lang='en'></html>
-  // `
-  text: JSON.stringify(values),
+  html: `<div>
+    ${Object.keys(values).map(key => `
+      <mark>${key}:</mark> ${values[key]}
+    `)}
+  </div>`,
+  attachments: [{
+    filename: file.originalname,
+    path: file.path,
+  }]
 })
 
-router.post("/", async (req, res) => {
-  const { token, values } = req.body;
+router.post("/form", upload.single('file'), async (req, res) => {
+  const { token, ...values } = req.body;
 
   try {
     const response = await axios.post(
@@ -46,7 +52,9 @@ router.post("/", async (req, res) => {
     );
 
     if (response.data.success) {
-      transporter.sendMail(mailOptions({ values }), (error, info) => {
+      transporter.sendMail(mailOptions(
+        { values, file: req.file }
+      ), (error, info) => {
         if (process.env.NODE_ENV !== 'production') {
           if (error) {
             console.log('error', error);
@@ -56,6 +64,20 @@ router.post("/", async (req, res) => {
           }
         }
       });
+
+      // fs.rmSync(req.file.path, {
+      //     force: true,
+      // });
+
+      // fs.unlink(req.file.path, (err) => {
+      //   if (err && err.code == 'ENOENT') {
+      //       console.info("File doesn't exist, won't remove it.");
+      //   } else if (err) {
+      //       console.error("Error occurred while trying to remove file");
+      //   } else {
+      //     console.info(`removed`);
+      //   }
+      // });
     } else {
       res.send("Error verifying reCAPTCHA");
     }

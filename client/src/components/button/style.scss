@@ -8,9 +8,11 @@
 
   width: 306px;
   height: 82px;
+  min-height: 82px;
   border-radius: 12px;
-  padding: 24px 48px;
-  font-size: 28px;
+  font-size: 1.75rem;
+  z-index: 1;
+  position: relative;
 
   &.secondary {
     background-color: var(--green);
@@ -30,7 +32,8 @@
   &.special {
     width: 184px;
     height: 53px;
-    padding: 12px 28px;
+    min-height: 53px;
+    padding: 0 28px;
     border-radius: 8px;
     font-size: 1.5rem;
   }
@@ -43,5 +46,11 @@
     color: #15151D80;
     background-color: #15151D1A;
     cursor: auto;
+  }
+
+  @media (max-width: 750px) {
+    width: 204px;
+    height: 56px;
+    min-height: 56px;
   }
 }

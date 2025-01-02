@@ -41,7 +41,7 @@ input[type=number] {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 16px;
+  padding: 16px 40px 16px 16px;
   color: #7F7AD8;
   font-size: 1.5rem;
 
@@ -51,8 +51,10 @@ input[type=number] {
 
   .trash {
     position: absolute;
+    width: 24px;
+    height: 26px;
     cursor: pointer;
-    right: 0;
+    right: 16px;
   }
 }
 

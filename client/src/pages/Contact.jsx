@@ -29,22 +29,22 @@ const INFOS = [
 const Contact = () => {
   return (
     <div className='contact'>
-      <div className='container'>
+      <div className='container padding'>
         <div className='formBox'>
           <h1>Contact Us</h1>
           <p>Please fill out the form below to get in touch with us. Our team will respond to your inquiry as soon as possible.</p>
           <Form />
         </div>
-        <img src={formImage} alt="" />
+        <img src={formImage} className='picture' alt="" />
       </div>
-      <div className='contacts'>
+      <div className='contacts padding'>
         {INFOS.map((info, index) => (
-          <address key={index}>
+          <div key={index}>
             <h4>{info.title}</h4>
             {info.data.map((item, index) => (
               <a href={item.link}  key={index}><p>{item.text}</p></a>
             ))}
-          </address>
+          </div>
         ))}
       </div>
     </div>

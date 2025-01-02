@@ -11,9 +11,19 @@ const PATHES = {
 const Info = () => {
   const location = useLocation();
   const infos = PATHES[location.pathname];
+
+  const scrollToContent = (id) => {
+    const content = document.getElementById(id);
+    const header = document.getElementById('header');
+
+    window.scrollTo({ 
+      top: content.offsetTop - header.getBoundingClientRect().height,
+      behavior: 'smooth' 
+    });
+  }
   
   return (
-    <div className='data'>
+    <div className='data padding'>
       <h1>{infos.title}</h1>
 
       {infos.intro ? (
@@ -28,7 +38,10 @@ const Info = () => {
           <h3>Table of contents</h3>
           <ol className="nav">
             {infos.data.map(info => (
-              <li key={info.id}><a href={`#${info.id}`}>{info.label}</a></li>
+              <li key={info.id} onClick={() => scrollToContent(info.id)}>
+                {/* <a href={`#${info.id}`}>{info.label}</a> */}
+                {info.label}
+              </li>
             ))}
           </ol>
         </div>

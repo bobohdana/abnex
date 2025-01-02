@@ -1,65 +1,119 @@
 .slider-outer {
+  position: relative;
   max-width: 1273px;
   width: 100%;
   overflow: hidden;
-
-  .slider-inner {
-    display: flex;
-    transition: transform 1.5s ease-in-out;
-  }
+  height: 564px;
 
   .slide {
-    min-width: 1273px;
-    margin-right: 20px;
+    position: absolute;
     height: 564px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    transition: opacity 1.5s linear;
+    visibility: visible;
+    opacity: 1;
 
     .info {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       max-width: 628px;
+      width: 100%;
+      margin-right: 16px;
+      height: 564px;
     }
 
     .illustration {
-      width: 629px;
+      display: flex;
+      align-items: center;
+      max-width: 629px;
+      width: 100%;
       height: 564px;
+
+      img {
+        width: 100%;
+      }
     }
   }
 
-  .controls {
+  @media (max-width: 900px) {
+    height: 900px;
+    .slide {
+      flex-direction: column;
+      height: auto;
+
+      .info {
+        height: auto;
+        margin-right: 0;
+      }
+
+      .illustration {
+        display: block;
+      }
+    }
+  }
+
+  @media (max-width: 750px) {
+    height: 600px;
+
+    .slide {
+      .illustration {
+        max-width: 400px;
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 550px) {
+    height: 620px;
+
+    .slide {
+      .illustration {
+        max-width: 336px;
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 450px) {
+    height: 680px;
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-top: 32px;
+  user-select: none;
+
+  .leftArrow, .rightArrow {
+    width: 32px;
+    height: 32px;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
-    margin-top: 32px;
+    cursor: pointer;
+  }
 
-    .leftArrow, .rightArrow {
-      width: 32px;
-      height: 32px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
+  .rightArrow {
+    transform: rotate(180deg);
+  }
 
-    .rightArrow {
-      transform: rotate(180deg);
-    }
-
-    .current {
-      font-size: 40px;
-      margin-left: 12px;
-    }
-    .slash {
-      font-size: 34px;
-      color: #C3C5EF;
-      margin: 0 4px;
-    }
-    .number {
-      font-size: 28px;
-      color: #C3C5EF;
-      margin-right: 12px;
-    }
+  .current {
+    font-size: 40px;
+    margin-left: 12px;
+  }
+  .slash {
+    font-size: 34px;
+    color: #C3C5EF;
+    margin: 0 4px;
+  }
+  .number {
+    font-size: 28px;
+    color: #C3C5EF;
+    margin-right: 12px;
   }
 }

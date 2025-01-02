@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import './style.scss';
@@ -70,20 +70,21 @@ const Form = ({ isPreview = false }) => {
     field, 
     initialValue 
   }) => {
-    if (isPreview && onPreview) {
+    if (isPreview && onPreview || !isPreview) {
       acc[field] = initialValue;
     }
     return acc;
   }, {})
+  
 
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
-
-  const captchaRef = useRef(null);
-  const token = captchaRef.current?.getValue();
+  const [isFormReset, setIsFormReset] = useState(false);
+  
+  const formRef = useRef(null);
   
   const dirty = Object.values(values).some(value => !!value);
   const isError = Object.values(errors).some(value => value);
@@ -93,41 +94,57 @@ const Form = ({ isPreview = false }) => {
     
     const _errors = {};
     Object.keys(values).forEach(key => {
-      if (!values[key] && key !== 'phone') {
+      if (!values[key] && key !== 'phone' && key !== 'file') {
         _errors[key] = true;
       }
     })
+    
     if (Object.keys(_errors).length) {
       setErrors(_errors);
     } else {
       setLoading(true);
+      const formData = new FormData(formRef.current);
+      const token = formData.get("g-recaptcha-response");
+      formData.delete("g-recaptcha-response");
+      formData.append('token', token)
       
-      fetch('/', {
+      fetch('/form', {
         method: 'POST',
-        body: JSON.stringify({ values, token }),
-        headers: {
-          'Content-Type': 'application/json',
-        }
+        body: formData,
       }).then(() => {
-        captchaRef.current.reset();
-        setValues(initialValues);
+        formRef.current.reset();
+        
+        setValues({ ...initialValues });
+        setIsFormReset(true);
+        setSelected(false);
         setLoading(false);
       })
     }
   }
   
   const handleChange = (event) => {
-    setValues(prev => ({
-      ...prev,
-      [event.target.name]: event.target.value, 
-    }))
+    console.log('handleChange');
     
-    if (event.target.value && event.target.required) {
-      setErrors(prev => ({
+    if (event.target.files) {
+      setValues(prev => ({
         ...prev,
-        [event.target.name]: false,
+        [event.target.name]: event.target.files[0], 
       }))
+    } else {
+      setValues(prev => ({
+        ...prev,
+        [event.target.name]: event.target.value, 
+      }))
+      
+      if (event.target.value && event.target.required) {
+        setErrors(prev => ({
+          ...prev,
+          [event.target.name]: false,
+        }))
+      }
     }
+
+    setIsFormReset(false);
   }
 
   const handleBlur = (event) => {
@@ -141,6 +158,7 @@ const Form = ({ isPreview = false }) => {
 
   return (
     <form
+      ref={formRef}
       onSubmit={handleSubmit}
       className='form'
       onChange={handleChange}
@@ -161,6 +179,7 @@ const Form = ({ isPreview = false }) => {
             disabled={loading}
             error={errors[field]}
             placeholder={placeholder}
+            isFormReset={isFormReset}
             required={required}
             type={type}
           />
@@ -194,7 +213,6 @@ const Form = ({ isPreview = false }) => {
           <ReCAPTCHA 
             // sitekey={process.env.REACT_APP_SITE_KEY}
             sitekey='6LfSGJ0qAAAAAHH1PXz-L0yLRUPRajqleKiR7RiD'
-            ref={captchaRef}
             onChange={() => setCaptchaVerified(true)}
             onExpired={() => setCaptchaVerified(false)}
           />
