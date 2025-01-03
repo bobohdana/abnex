@@ -24,7 +24,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "https://abnex-lyart.vercel.app",
   "devDependencies": {
     "dotenv": "^16.4.7",
     "sass": "^1.82.0"
