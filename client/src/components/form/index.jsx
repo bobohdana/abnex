@@ -207,7 +207,8 @@ const Form = ({ isPreview = false }) => {
       {selected && (
         <div className="captcha">
           <ReCAPTCHA 
-            sitekey={process.env.REACT_APP_SITE_KEY}
+            // sitekey={process.env.REACT_APP_SITE_KEY}
+            sitekey='6LfSGJ0qAAAAAHH1PXz-L0yLRUPRajqleKiR7RiD'
             onChange={() => setCaptchaVerified(true)}
             onExpired={() => setCaptchaVerified(false)}
           />

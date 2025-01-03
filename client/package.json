@@ -1,8 +1,8 @@
 {
   "name": "abnex-client",
   "scripts": {
-    "start": "dotenv -e ../.env react-scripts start",
-    "build": "dotenv -e ../.env react-scripts build"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "dependencies": {
     "abnex": "file:..",
