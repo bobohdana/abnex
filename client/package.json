@@ -1,8 +1,8 @@
 {
   "name": "abnex",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "start": "dotenv -e ../.env react-scripts start",
+    "build": "dotenv -e ../.env react-scripts build"
   },
   "dependencies": {
     "react": "^19.0.0",

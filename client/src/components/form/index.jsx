@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import './style.scss';
@@ -207,8 +207,7 @@ const Form = ({ isPreview = false }) => {
       {selected && (
         <div className="captcha">
           <ReCAPTCHA 
-            // sitekey={process.env.REACT_APP_SITE_KEY}
-            sitekey='6LfSGJ0qAAAAAHH1PXz-L0yLRUPRajqleKiR7RiD'
+            sitekey={process.env.REACT_APP_SITE_KEY}
             onChange={() => setCaptchaVerified(true)}
             onExpired={() => setCaptchaVerified(false)}
           />
