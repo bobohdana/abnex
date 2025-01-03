@@ -7,7 +7,7 @@ const nodemailer = require("nodemailer");
 
 const router = express.Router();
 const app = express();
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: '/tmp/uploads' });
 
 require("dotenv").config();
 
