@@ -37,7 +37,7 @@ const mailOptions = ({ values, file }) => ({
       <mark>${key}:</mark> ${values[key]}
     `)}
   </div>`,
-  attachments: [{
+  attachments: file && [{
     filename: file.originalname,
     path: file.path,
   }]
@@ -63,21 +63,19 @@ router.post("/form", upload.single('file'), async (req, res) => {
             res.status(200).send("The form is sent");
           }
         }
+
+        if (!error) {
+          fs.unlink(req.file.path, (err) => {
+            if (err && err.code == 'ENOENT') {
+                console.info("File doesn't exist, won't remove it.");
+            } else if (err) {
+                console.error("Error occurred while trying to remove file");
+            } else {
+              console.info(`removed`);
+            }
+          });
+        }
       });
-
-      // fs.rmSync(req.file.path, {
-      //     force: true,
-      // });
-
-      // fs.unlink(req.file.path, (err) => {
-      //   if (err && err.code == 'ENOENT') {
-      //       console.info("File doesn't exist, won't remove it.");
-      //   } else if (err) {
-      //       console.error("Error occurred while trying to remove file");
-      //   } else {
-      //     console.info(`removed`);
-      //   }
-      // });
     } else {
       res.send("Error verifying reCAPTCHA");
     }

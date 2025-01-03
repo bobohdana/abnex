@@ -123,8 +123,6 @@ const Form = ({ isPreview = false }) => {
   }
   
   const handleChange = (event) => {
-    console.log('handleChange');
-    
     if (event.target.files) {
       setValues(prev => ({
         ...prev,
@@ -196,17 +194,15 @@ const Form = ({ isPreview = false }) => {
         ) : null)
       }
 
-      {!isPreview && (
-        <div className='condition'>
-          <div className={`checkbox ${selected && 'selected'}`} onClick={() => setSelected(!selected)} />
-          <p>
-            I have read and agree to the 
-            <a href='/terms-and-conditions' target='_blank' className='link'>&nbsp;terms of service&nbsp;</a>
-            an
-            <a href='/privacy-policy' target='_blank' className='link'>&nbsp;privacy policies</a>
-          </p>
-        </div>
-      )}
+      <div className='condition'>
+        <div className={`checkbox ${selected && 'selected'}`} onClick={() => setSelected(!selected)} />
+        <p>
+          I have read and agree to the 
+          <a href='/terms-and-conditions' target='_blank' className='link'>&nbsp;terms of service&nbsp;</a>
+          an
+          <a href='/privacy-policy' target='_blank' className='link'>&nbsp;privacy policies</a>
+        </p>
+      </div>
 
       {selected && (
         <div className="captcha">
@@ -222,7 +218,7 @@ const Form = ({ isPreview = false }) => {
       <Button
         type='submit'
         size='small'
-        disabled={!dirty || isError || !selected || !captchaVerified}
+        disabled={!dirty || isError || !selected || !captchaVerified || loading}
       >
         Send
       </Button>
