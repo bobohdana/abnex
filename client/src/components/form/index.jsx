@@ -108,7 +108,7 @@ const Form = ({ isPreview = false }) => {
       formData.delete("g-recaptcha-response");
       formData.append('token', token)
       
-      fetch('/form', {
+      fetch('https://abnex-lyart.vercel.app/form', {
         method: 'POST',
         body: formData,
       }).then(() => {
